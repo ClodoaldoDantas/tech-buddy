@@ -1,3 +1,4 @@
+import { Header } from '@/components/header'
 import type { Metadata } from 'next'
 import { Space_Grotesk } from 'next/font/google'
 import './globals.css'
@@ -20,8 +21,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`antialiased ${spaceGrotesk.variable} font-app`}>
-        {children}
+      <body
+        className={`antialiased ${spaceGrotesk.variable} font-app bg-gray-50`}
+      >
+        <Header />
       </body>
     </html>
   )
