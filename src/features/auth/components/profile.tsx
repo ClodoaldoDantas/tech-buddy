@@ -22,7 +22,7 @@ export function Profile({ user }: { user: User }) {
           </AvatarFallback>
         </Avatar>
 
-        <span className="font-medium">Meu Perfil</span>
+        <span>Meu Perfil</span>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent>
