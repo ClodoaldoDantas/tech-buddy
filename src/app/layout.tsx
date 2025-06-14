@@ -25,6 +25,7 @@ export default function RootLayout({
         className={`antialiased ${spaceGrotesk.variable} font-app bg-gray-50`}
       >
         <Header />
+        {children}
       </body>
     </html>
   )
