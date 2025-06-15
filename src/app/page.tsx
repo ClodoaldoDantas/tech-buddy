@@ -1,51 +1,15 @@
-import { TechCard } from '@/features/technologies/tech-card'
+import { SearchForm } from '@/features/technologies/components/search-form'
+import { TechList } from '@/features/technologies/components/tech-list'
+import { TechListSkeleton } from '@/features/technologies/components/tech-list-skeleton'
+import { Suspense } from 'react'
 
-export default function Home() {
-  const technologies = [
-    {
-      id: 1,
-      name: 'React',
-      description:
-        'Uma biblioteca JavaScript para construir interfaces de usuário.',
-      rating: 4.5,
-      totalReviews: 1200,
-    },
-    {
-      id: 2,
-      name: 'Next.js',
-      description: 'Um framework React para aplicações web modernas.',
-      rating: 4.8,
-      totalReviews: 800,
-    },
-    {
-      id: 3,
-      name: 'Tailwind CSS',
-      description: 'Um framework CSS utilitário para estilização rápida.',
-      rating: 4.7,
-      totalReviews: 600,
-    },
-    {
-      id: 4,
-      name: 'Node.js',
-      description: 'Um ambiente de execução JavaScript no lado do servidor.',
-      rating: 4.6,
-      totalReviews: 900,
-    },
-    {
-      id: 5,
-      name: 'Django',
-      description: 'Um framework web Python para desenvolvimento rápido.',
-      rating: 4.4,
-      totalReviews: 500,
-    },
-    {
-      id: 6,
-      name: 'Flask',
-      description: 'Um microframework web Python leve e flexível.',
-      rating: 4.3,
-      totalReviews: 300,
-    },
-  ]
+type HomeProps = {
+  searchParams?: Promise<{ search?: string }>
+}
+
+export default async function Home(props: HomeProps) {
+  const searchParams = await props.searchParams
+  const searchTerm = searchParams?.search || ''
 
   return (
     <main className="max-w-7xl w-full mx-auto px-4">
@@ -59,11 +23,11 @@ export default function Home() {
         </p>
       </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-8">
-        {technologies.map((tech) => (
-          <TechCard data={tech} key={tech.id} />
-        ))}
-      </div>
+      <SearchForm />
+
+      <Suspense key={searchTerm} fallback={<TechListSkeleton />}>
+        <TechList searchTerm={searchTerm} />
+      </Suspense>
     </main>
   )
 }

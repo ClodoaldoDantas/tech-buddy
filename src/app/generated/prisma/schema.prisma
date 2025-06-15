@@ -58,3 +58,13 @@ model VerificationToken {
   @@unique([identifier, token])
   @@map("verification_tokens")
 }
+
+model Technology {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("technologies")
+}

@@ -33,6 +33,11 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  * 
  */
 export type VerificationToken = $Result.DefaultSelection<Prisma.$VerificationTokenPayload>
+/**
+ * Model Technology
+ * 
+ */
+export type Technology = $Result.DefaultSelection<Prisma.$TechnologyPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -198,6 +203,16 @@ export class PrismaClient<
     * ```
     */
   get verificationToken(): Prisma.VerificationTokenDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.technology`: Exposes CRUD operations for the **Technology** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Technologies
+    * const technologies = await prisma.technology.findMany()
+    * ```
+    */
+  get technology(): Prisma.TechnologyDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -641,7 +656,8 @@ export namespace Prisma {
     Account: 'Account',
     Session: 'Session',
     User: 'User',
-    VerificationToken: 'VerificationToken'
+    VerificationToken: 'VerificationToken',
+    Technology: 'Technology'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -660,7 +676,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "account" | "session" | "user" | "verificationToken"
+      modelProps: "account" | "session" | "user" | "verificationToken" | "technology"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -960,6 +976,80 @@ export namespace Prisma {
           }
         }
       }
+      Technology: {
+        payload: Prisma.$TechnologyPayload<ExtArgs>
+        fields: Prisma.TechnologyFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TechnologyFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TechnologyPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TechnologyFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TechnologyPayload>
+          }
+          findFirst: {
+            args: Prisma.TechnologyFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TechnologyPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TechnologyFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TechnologyPayload>
+          }
+          findMany: {
+            args: Prisma.TechnologyFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TechnologyPayload>[]
+          }
+          create: {
+            args: Prisma.TechnologyCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TechnologyPayload>
+          }
+          createMany: {
+            args: Prisma.TechnologyCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TechnologyCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TechnologyPayload>[]
+          }
+          delete: {
+            args: Prisma.TechnologyDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TechnologyPayload>
+          }
+          update: {
+            args: Prisma.TechnologyUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TechnologyPayload>
+          }
+          deleteMany: {
+            args: Prisma.TechnologyDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TechnologyUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TechnologyUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TechnologyPayload>[]
+          }
+          upsert: {
+            args: Prisma.TechnologyUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TechnologyPayload>
+          }
+          aggregate: {
+            args: Prisma.TechnologyAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTechnology>
+          }
+          groupBy: {
+            args: Prisma.TechnologyGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TechnologyGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TechnologyCountArgs<ExtArgs>
+            result: $Utils.Optional<TechnologyCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1048,6 +1138,7 @@ export namespace Prisma {
     session?: SessionOmit
     user?: UserOmit
     verificationToken?: VerificationTokenOmit
+    technology?: TechnologyOmit
   }
 
   /* Types for Logging */
@@ -5469,6 +5560,999 @@ export namespace Prisma {
 
 
   /**
+   * Model Technology
+   */
+
+  export type AggregateTechnology = {
+    _count: TechnologyCountAggregateOutputType | null
+    _min: TechnologyMinAggregateOutputType | null
+    _max: TechnologyMaxAggregateOutputType | null
+  }
+
+  export type TechnologyMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    slug: string | null
+    description: string | null
+    createdAt: Date | null
+  }
+
+  export type TechnologyMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    slug: string | null
+    description: string | null
+    createdAt: Date | null
+  }
+
+  export type TechnologyCountAggregateOutputType = {
+    id: number
+    name: number
+    slug: number
+    description: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type TechnologyMinAggregateInputType = {
+    id?: true
+    name?: true
+    slug?: true
+    description?: true
+    createdAt?: true
+  }
+
+  export type TechnologyMaxAggregateInputType = {
+    id?: true
+    name?: true
+    slug?: true
+    description?: true
+    createdAt?: true
+  }
+
+  export type TechnologyCountAggregateInputType = {
+    id?: true
+    name?: true
+    slug?: true
+    description?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type TechnologyAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Technology to aggregate.
+     */
+    where?: TechnologyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Technologies to fetch.
+     */
+    orderBy?: TechnologyOrderByWithRelationInput | TechnologyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TechnologyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Technologies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Technologies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Technologies
+    **/
+    _count?: true | TechnologyCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TechnologyMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TechnologyMaxAggregateInputType
+  }
+
+  export type GetTechnologyAggregateType<T extends TechnologyAggregateArgs> = {
+        [P in keyof T & keyof AggregateTechnology]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTechnology[P]>
+      : GetScalarType<T[P], AggregateTechnology[P]>
+  }
+
+
+
+
+  export type TechnologyGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TechnologyWhereInput
+    orderBy?: TechnologyOrderByWithAggregationInput | TechnologyOrderByWithAggregationInput[]
+    by: TechnologyScalarFieldEnum[] | TechnologyScalarFieldEnum
+    having?: TechnologyScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TechnologyCountAggregateInputType | true
+    _min?: TechnologyMinAggregateInputType
+    _max?: TechnologyMaxAggregateInputType
+  }
+
+  export type TechnologyGroupByOutputType = {
+    id: string
+    name: string
+    slug: string
+    description: string
+    createdAt: Date
+    _count: TechnologyCountAggregateOutputType | null
+    _min: TechnologyMinAggregateOutputType | null
+    _max: TechnologyMaxAggregateOutputType | null
+  }
+
+  type GetTechnologyGroupByPayload<T extends TechnologyGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TechnologyGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TechnologyGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TechnologyGroupByOutputType[P]>
+            : GetScalarType<T[P], TechnologyGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TechnologySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    description?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["technology"]>
+
+  export type TechnologySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    description?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["technology"]>
+
+  export type TechnologySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    description?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["technology"]>
+
+  export type TechnologySelectScalar = {
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    description?: boolean
+    createdAt?: boolean
+  }
+
+  export type TechnologyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "createdAt", ExtArgs["result"]["technology"]>
+
+  export type $TechnologyPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Technology"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      slug: string
+      description: string
+      createdAt: Date
+    }, ExtArgs["result"]["technology"]>
+    composites: {}
+  }
+
+  type TechnologyGetPayload<S extends boolean | null | undefined | TechnologyDefaultArgs> = $Result.GetResult<Prisma.$TechnologyPayload, S>
+
+  type TechnologyCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TechnologyFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TechnologyCountAggregateInputType | true
+    }
+
+  export interface TechnologyDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Technology'], meta: { name: 'Technology' } }
+    /**
+     * Find zero or one Technology that matches the filter.
+     * @param {TechnologyFindUniqueArgs} args - Arguments to find a Technology
+     * @example
+     * // Get one Technology
+     * const technology = await prisma.technology.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TechnologyFindUniqueArgs>(args: SelectSubset<T, TechnologyFindUniqueArgs<ExtArgs>>): Prisma__TechnologyClient<$Result.GetResult<Prisma.$TechnologyPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Technology that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TechnologyFindUniqueOrThrowArgs} args - Arguments to find a Technology
+     * @example
+     * // Get one Technology
+     * const technology = await prisma.technology.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TechnologyFindUniqueOrThrowArgs>(args: SelectSubset<T, TechnologyFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TechnologyClient<$Result.GetResult<Prisma.$TechnologyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Technology that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TechnologyFindFirstArgs} args - Arguments to find a Technology
+     * @example
+     * // Get one Technology
+     * const technology = await prisma.technology.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TechnologyFindFirstArgs>(args?: SelectSubset<T, TechnologyFindFirstArgs<ExtArgs>>): Prisma__TechnologyClient<$Result.GetResult<Prisma.$TechnologyPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Technology that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TechnologyFindFirstOrThrowArgs} args - Arguments to find a Technology
+     * @example
+     * // Get one Technology
+     * const technology = await prisma.technology.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TechnologyFindFirstOrThrowArgs>(args?: SelectSubset<T, TechnologyFindFirstOrThrowArgs<ExtArgs>>): Prisma__TechnologyClient<$Result.GetResult<Prisma.$TechnologyPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Technologies that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TechnologyFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Technologies
+     * const technologies = await prisma.technology.findMany()
+     * 
+     * // Get first 10 Technologies
+     * const technologies = await prisma.technology.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const technologyWithIdOnly = await prisma.technology.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TechnologyFindManyArgs>(args?: SelectSubset<T, TechnologyFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TechnologyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Technology.
+     * @param {TechnologyCreateArgs} args - Arguments to create a Technology.
+     * @example
+     * // Create one Technology
+     * const Technology = await prisma.technology.create({
+     *   data: {
+     *     // ... data to create a Technology
+     *   }
+     * })
+     * 
+     */
+    create<T extends TechnologyCreateArgs>(args: SelectSubset<T, TechnologyCreateArgs<ExtArgs>>): Prisma__TechnologyClient<$Result.GetResult<Prisma.$TechnologyPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Technologies.
+     * @param {TechnologyCreateManyArgs} args - Arguments to create many Technologies.
+     * @example
+     * // Create many Technologies
+     * const technology = await prisma.technology.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TechnologyCreateManyArgs>(args?: SelectSubset<T, TechnologyCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Technologies and returns the data saved in the database.
+     * @param {TechnologyCreateManyAndReturnArgs} args - Arguments to create many Technologies.
+     * @example
+     * // Create many Technologies
+     * const technology = await prisma.technology.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Technologies and only return the `id`
+     * const technologyWithIdOnly = await prisma.technology.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TechnologyCreateManyAndReturnArgs>(args?: SelectSubset<T, TechnologyCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TechnologyPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Technology.
+     * @param {TechnologyDeleteArgs} args - Arguments to delete one Technology.
+     * @example
+     * // Delete one Technology
+     * const Technology = await prisma.technology.delete({
+     *   where: {
+     *     // ... filter to delete one Technology
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TechnologyDeleteArgs>(args: SelectSubset<T, TechnologyDeleteArgs<ExtArgs>>): Prisma__TechnologyClient<$Result.GetResult<Prisma.$TechnologyPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Technology.
+     * @param {TechnologyUpdateArgs} args - Arguments to update one Technology.
+     * @example
+     * // Update one Technology
+     * const technology = await prisma.technology.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TechnologyUpdateArgs>(args: SelectSubset<T, TechnologyUpdateArgs<ExtArgs>>): Prisma__TechnologyClient<$Result.GetResult<Prisma.$TechnologyPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Technologies.
+     * @param {TechnologyDeleteManyArgs} args - Arguments to filter Technologies to delete.
+     * @example
+     * // Delete a few Technologies
+     * const { count } = await prisma.technology.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TechnologyDeleteManyArgs>(args?: SelectSubset<T, TechnologyDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Technologies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TechnologyUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Technologies
+     * const technology = await prisma.technology.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TechnologyUpdateManyArgs>(args: SelectSubset<T, TechnologyUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Technologies and returns the data updated in the database.
+     * @param {TechnologyUpdateManyAndReturnArgs} args - Arguments to update many Technologies.
+     * @example
+     * // Update many Technologies
+     * const technology = await prisma.technology.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Technologies and only return the `id`
+     * const technologyWithIdOnly = await prisma.technology.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TechnologyUpdateManyAndReturnArgs>(args: SelectSubset<T, TechnologyUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TechnologyPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Technology.
+     * @param {TechnologyUpsertArgs} args - Arguments to update or create a Technology.
+     * @example
+     * // Update or create a Technology
+     * const technology = await prisma.technology.upsert({
+     *   create: {
+     *     // ... data to create a Technology
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Technology we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TechnologyUpsertArgs>(args: SelectSubset<T, TechnologyUpsertArgs<ExtArgs>>): Prisma__TechnologyClient<$Result.GetResult<Prisma.$TechnologyPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Technologies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TechnologyCountArgs} args - Arguments to filter Technologies to count.
+     * @example
+     * // Count the number of Technologies
+     * const count = await prisma.technology.count({
+     *   where: {
+     *     // ... the filter for the Technologies we want to count
+     *   }
+     * })
+    **/
+    count<T extends TechnologyCountArgs>(
+      args?: Subset<T, TechnologyCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TechnologyCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Technology.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TechnologyAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TechnologyAggregateArgs>(args: Subset<T, TechnologyAggregateArgs>): Prisma.PrismaPromise<GetTechnologyAggregateType<T>>
+
+    /**
+     * Group by Technology.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TechnologyGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TechnologyGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TechnologyGroupByArgs['orderBy'] }
+        : { orderBy?: TechnologyGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TechnologyGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTechnologyGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Technology model
+   */
+  readonly fields: TechnologyFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Technology.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TechnologyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Technology model
+   */
+  interface TechnologyFieldRefs {
+    readonly id: FieldRef<"Technology", 'String'>
+    readonly name: FieldRef<"Technology", 'String'>
+    readonly slug: FieldRef<"Technology", 'String'>
+    readonly description: FieldRef<"Technology", 'String'>
+    readonly createdAt: FieldRef<"Technology", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Technology findUnique
+   */
+  export type TechnologyFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Technology
+     */
+    select?: TechnologySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Technology
+     */
+    omit?: TechnologyOmit<ExtArgs> | null
+    /**
+     * Filter, which Technology to fetch.
+     */
+    where: TechnologyWhereUniqueInput
+  }
+
+  /**
+   * Technology findUniqueOrThrow
+   */
+  export type TechnologyFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Technology
+     */
+    select?: TechnologySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Technology
+     */
+    omit?: TechnologyOmit<ExtArgs> | null
+    /**
+     * Filter, which Technology to fetch.
+     */
+    where: TechnologyWhereUniqueInput
+  }
+
+  /**
+   * Technology findFirst
+   */
+  export type TechnologyFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Technology
+     */
+    select?: TechnologySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Technology
+     */
+    omit?: TechnologyOmit<ExtArgs> | null
+    /**
+     * Filter, which Technology to fetch.
+     */
+    where?: TechnologyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Technologies to fetch.
+     */
+    orderBy?: TechnologyOrderByWithRelationInput | TechnologyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Technologies.
+     */
+    cursor?: TechnologyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Technologies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Technologies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Technologies.
+     */
+    distinct?: TechnologyScalarFieldEnum | TechnologyScalarFieldEnum[]
+  }
+
+  /**
+   * Technology findFirstOrThrow
+   */
+  export type TechnologyFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Technology
+     */
+    select?: TechnologySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Technology
+     */
+    omit?: TechnologyOmit<ExtArgs> | null
+    /**
+     * Filter, which Technology to fetch.
+     */
+    where?: TechnologyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Technologies to fetch.
+     */
+    orderBy?: TechnologyOrderByWithRelationInput | TechnologyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Technologies.
+     */
+    cursor?: TechnologyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Technologies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Technologies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Technologies.
+     */
+    distinct?: TechnologyScalarFieldEnum | TechnologyScalarFieldEnum[]
+  }
+
+  /**
+   * Technology findMany
+   */
+  export type TechnologyFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Technology
+     */
+    select?: TechnologySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Technology
+     */
+    omit?: TechnologyOmit<ExtArgs> | null
+    /**
+     * Filter, which Technologies to fetch.
+     */
+    where?: TechnologyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Technologies to fetch.
+     */
+    orderBy?: TechnologyOrderByWithRelationInput | TechnologyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Technologies.
+     */
+    cursor?: TechnologyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Technologies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Technologies.
+     */
+    skip?: number
+    distinct?: TechnologyScalarFieldEnum | TechnologyScalarFieldEnum[]
+  }
+
+  /**
+   * Technology create
+   */
+  export type TechnologyCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Technology
+     */
+    select?: TechnologySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Technology
+     */
+    omit?: TechnologyOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Technology.
+     */
+    data: XOR<TechnologyCreateInput, TechnologyUncheckedCreateInput>
+  }
+
+  /**
+   * Technology createMany
+   */
+  export type TechnologyCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Technologies.
+     */
+    data: TechnologyCreateManyInput | TechnologyCreateManyInput[]
+  }
+
+  /**
+   * Technology createManyAndReturn
+   */
+  export type TechnologyCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Technology
+     */
+    select?: TechnologySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Technology
+     */
+    omit?: TechnologyOmit<ExtArgs> | null
+    /**
+     * The data used to create many Technologies.
+     */
+    data: TechnologyCreateManyInput | TechnologyCreateManyInput[]
+  }
+
+  /**
+   * Technology update
+   */
+  export type TechnologyUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Technology
+     */
+    select?: TechnologySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Technology
+     */
+    omit?: TechnologyOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Technology.
+     */
+    data: XOR<TechnologyUpdateInput, TechnologyUncheckedUpdateInput>
+    /**
+     * Choose, which Technology to update.
+     */
+    where: TechnologyWhereUniqueInput
+  }
+
+  /**
+   * Technology updateMany
+   */
+  export type TechnologyUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Technologies.
+     */
+    data: XOR<TechnologyUpdateManyMutationInput, TechnologyUncheckedUpdateManyInput>
+    /**
+     * Filter which Technologies to update
+     */
+    where?: TechnologyWhereInput
+    /**
+     * Limit how many Technologies to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Technology updateManyAndReturn
+   */
+  export type TechnologyUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Technology
+     */
+    select?: TechnologySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Technology
+     */
+    omit?: TechnologyOmit<ExtArgs> | null
+    /**
+     * The data used to update Technologies.
+     */
+    data: XOR<TechnologyUpdateManyMutationInput, TechnologyUncheckedUpdateManyInput>
+    /**
+     * Filter which Technologies to update
+     */
+    where?: TechnologyWhereInput
+    /**
+     * Limit how many Technologies to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Technology upsert
+   */
+  export type TechnologyUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Technology
+     */
+    select?: TechnologySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Technology
+     */
+    omit?: TechnologyOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Technology to update in case it exists.
+     */
+    where: TechnologyWhereUniqueInput
+    /**
+     * In case the Technology found by the `where` argument doesn't exist, create a new Technology with this data.
+     */
+    create: XOR<TechnologyCreateInput, TechnologyUncheckedCreateInput>
+    /**
+     * In case the Technology was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TechnologyUpdateInput, TechnologyUncheckedUpdateInput>
+  }
+
+  /**
+   * Technology delete
+   */
+  export type TechnologyDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Technology
+     */
+    select?: TechnologySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Technology
+     */
+    omit?: TechnologyOmit<ExtArgs> | null
+    /**
+     * Filter which Technology to delete.
+     */
+    where: TechnologyWhereUniqueInput
+  }
+
+  /**
+   * Technology deleteMany
+   */
+  export type TechnologyDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Technologies to delete
+     */
+    where?: TechnologyWhereInput
+    /**
+     * Limit how many Technologies to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Technology without action
+   */
+  export type TechnologyDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Technology
+     */
+    select?: TechnologySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Technology
+     */
+    omit?: TechnologyOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -5525,6 +6609,17 @@ export namespace Prisma {
   };
 
   export type VerificationTokenScalarFieldEnum = (typeof VerificationTokenScalarFieldEnum)[keyof typeof VerificationTokenScalarFieldEnum]
+
+
+  export const TechnologyScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    slug: 'slug',
+    description: 'description',
+    createdAt: 'createdAt'
+  };
+
+  export type TechnologyScalarFieldEnum = (typeof TechnologyScalarFieldEnum)[keyof typeof TechnologyScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -5823,6 +6918,58 @@ export namespace Prisma {
     expires?: DateTimeWithAggregatesFilter<"VerificationToken"> | Date | string
   }
 
+  export type TechnologyWhereInput = {
+    AND?: TechnologyWhereInput | TechnologyWhereInput[]
+    OR?: TechnologyWhereInput[]
+    NOT?: TechnologyWhereInput | TechnologyWhereInput[]
+    id?: StringFilter<"Technology"> | string
+    name?: StringFilter<"Technology"> | string
+    slug?: StringFilter<"Technology"> | string
+    description?: StringFilter<"Technology"> | string
+    createdAt?: DateTimeFilter<"Technology"> | Date | string
+  }
+
+  export type TechnologyOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type TechnologyWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    slug?: string
+    AND?: TechnologyWhereInput | TechnologyWhereInput[]
+    OR?: TechnologyWhereInput[]
+    NOT?: TechnologyWhereInput | TechnologyWhereInput[]
+    name?: StringFilter<"Technology"> | string
+    description?: StringFilter<"Technology"> | string
+    createdAt?: DateTimeFilter<"Technology"> | Date | string
+  }, "id" | "slug">
+
+  export type TechnologyOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrder
+    createdAt?: SortOrder
+    _count?: TechnologyCountOrderByAggregateInput
+    _max?: TechnologyMaxOrderByAggregateInput
+    _min?: TechnologyMinOrderByAggregateInput
+  }
+
+  export type TechnologyScalarWhereWithAggregatesInput = {
+    AND?: TechnologyScalarWhereWithAggregatesInput | TechnologyScalarWhereWithAggregatesInput[]
+    OR?: TechnologyScalarWhereWithAggregatesInput[]
+    NOT?: TechnologyScalarWhereWithAggregatesInput | TechnologyScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Technology"> | string
+    name?: StringWithAggregatesFilter<"Technology"> | string
+    slug?: StringWithAggregatesFilter<"Technology"> | string
+    description?: StringWithAggregatesFilter<"Technology"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Technology"> | Date | string
+  }
+
   export type AccountCreateInput = {
     id?: string
     type: string
@@ -6079,6 +7226,62 @@ export namespace Prisma {
     identifier?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
     expires?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TechnologyCreateInput = {
+    id?: string
+    name: string
+    slug: string
+    description: string
+    createdAt?: Date | string
+  }
+
+  export type TechnologyUncheckedCreateInput = {
+    id?: string
+    name: string
+    slug: string
+    description: string
+    createdAt?: Date | string
+  }
+
+  export type TechnologyUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TechnologyUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TechnologyCreateManyInput = {
+    id?: string
+    name: string
+    slug: string
+    description: string
+    createdAt?: Date | string
+  }
+
+  export type TechnologyUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TechnologyUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -6374,6 +7577,30 @@ export namespace Prisma {
     identifier?: SortOrder
     token?: SortOrder
     expires?: SortOrder
+  }
+
+  export type TechnologyCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type TechnologyMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type TechnologyMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type UserCreateNestedOneWithoutAccountsInput = {
