@@ -1,9 +1,12 @@
+import { Stars } from '@/components/stars'
 import {
   Card,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { BotIcon } from 'lucide-react'
 import Link from 'next/link'
 
 type TechCardProps = {
@@ -12,6 +15,8 @@ type TechCardProps = {
     name: string
     slug: string
     description: string
+    reviewsCount: number
+    averageRating: number
   }
 }
 
@@ -26,19 +31,19 @@ export function TechCard({ data }: TechCardProps) {
           </CardDescription>
         </CardHeader>
 
-        {/* <CardFooter className="flex items-center justify-between">
-          <Stars value={data.rating} />
+        <CardFooter className="flex items-center justify-between">
+          <Stars value={data.averageRating} />
 
           <div className="text-zinc-500 flex items-center gap-2">
             <BotIcon className="size-5" />
 
-            {data.totalReviews === 1 ? (
-              <span>{data.totalReviews} avaliação</span>
+            {data.reviewsCount === 1 ? (
+              <span>{data.reviewsCount} avaliação</span>
             ) : (
-              <span>{data.totalReviews} avaliações</span>
+              <span>{data.reviewsCount} avaliações</span>
             )}
           </div>
-        </CardFooter> */}
+        </CardFooter>
       </Card>
     </Link>
   )

@@ -46,6 +46,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  reviews       Review[]
 
   @@map("users")
 }
@@ -65,6 +66,23 @@ model Technology {
   slug        String   @unique
   description String
   createdAt   DateTime @default(now()) @map("created_at")
+  reviews     Review[]
 
   @@map("technologies")
+}
+
+model Review {
+  id String @id @default(cuid())
+
+  userId String @map("user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  technologyId String     @map("technology_id")
+  technology   Technology @relation(fields: [technologyId], references: [id], onDelete: Cascade)
+
+  rating  Int
+  comment String?
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 }

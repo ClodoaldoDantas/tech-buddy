@@ -12,6 +12,6 @@
     "editor.defaultFormatter": "biomejs.biome"
   },
   "[prisma]": {
-    "editor.defaultFormatter": "Prisma.prisma"
+    "editor.defaultFormatter": "Prisma.prisma-insider"
   }
 }
