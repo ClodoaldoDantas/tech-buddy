@@ -60,6 +60,17 @@ const comments: string[] = [
   'A quantidade de recursos e bibliotecas disponíveis é impressionante.',
   'A simplicidade dessa tecnologia é um dos seus maiores atrativos.',
   'A escalabilidade dessa tecnologia é excelente.',
+  'A segurança dessa tecnologia é uma prioridade.',
+  'A facilidade de integração com APIs é um grande benefício.',
+  'A capacidade de personalização é um dos pontos fortes dessa tecnologia.',
+  'A performance em aplicações de grande escala é notável.',
+  'A curva de aprendizado é rápida, o que facilita a adoção.',
+  'A comunidade é muito colaborativa e sempre disposta a ajudar.',
+  'A documentação é clara e bem estruturada, facilitando o aprendizado.',
+  'A flexibilidade dessa tecnologia permite criar soluções inovadoras.',
+  'A compatibilidade com diferentes sistemas operacionais é um grande diferencial.',
+  'A adoção dessa tecnologia está crescendo rapidamente entre os desenvolvedores.',
+  'A integração com outras ferramentas é muito bem suportada.',
 ]
 
 export async function main() {
@@ -79,7 +90,7 @@ export async function main() {
   const dbUsers = await prisma.user.findMany()
 
   for (const tech of dbTechnologies) {
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 20; i++) {
       const user = dbUsers[i % dbUsers.length]
 
       await prisma.review.create({

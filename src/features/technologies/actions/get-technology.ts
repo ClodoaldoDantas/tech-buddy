@@ -6,26 +6,6 @@ export async function getTechnologyWithReviews(slug: string) {
       where: {
         slug,
       },
-      include: {
-        reviews: {
-          orderBy: {
-            updatedAt: 'desc',
-          },
-          select: {
-            id: true,
-            rating: true,
-            comment: true,
-            updatedAt: true,
-            user: {
-              select: {
-                id: true,
-                name: true,
-                image: true,
-              },
-            },
-          },
-        },
-      },
     })
 
     if (!tech) {

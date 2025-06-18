@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button'
+import { getReviews } from '@/features/reviews/actions/get-reviews'
 import { TechReviewsCard } from '@/features/reviews/components/tech-reviews-card'
 import { getTechnologyWithReviews } from '@/features/technologies/actions/get-technology'
 import { TechCardDetails } from '@/features/technologies/components/tech-card-details'
@@ -6,17 +7,20 @@ import { ChevronLeftIcon } from 'lucide-react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
-export default async function TechnologyPage({
-  params,
-}: {
+export default async function TechnologyPage(props: {
   params: Promise<{ slug: string }>
+  searchParams?: Promise<{ page?: string }>
 }) {
-  const { slug } = await params
+  const { slug } = await props.params
   const { technology } = await getTechnologyWithReviews(slug)
 
   if (!technology) {
     notFound()
   }
+
+  const searchParams = await props.searchParams
+  const page = Number(searchParams?.page) || 1
+  const { reviews, totalReviews } = await getReviews(technology.id, page)
 
   return (
     <main className="max-w-4xl w-full mx-auto px-4 py-8 space-y-4">
@@ -31,8 +35,12 @@ export default async function TechnologyPage({
         </Link>
       </Button>
 
-      <TechCardDetails data={technology} />
-      <TechReviewsCard reviews={technology.reviews} />
+      <TechCardDetails technology={technology} />
+      <TechReviewsCard
+        reviews={reviews}
+        currentPage={page}
+        totalReviews={totalReviews}
+      />
     </main>
   )
 }

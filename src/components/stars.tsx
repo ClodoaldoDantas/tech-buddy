@@ -17,7 +17,7 @@ export function Stars({ value, showValue = true }: StarsProps) {
         ))}
       </div>
 
-      {showValue && <strong className="font-medium">{value}</strong>}
+      {showValue && <strong className="font-medium">{value.toFixed(1)}</strong>}
     </div>
   )
 }

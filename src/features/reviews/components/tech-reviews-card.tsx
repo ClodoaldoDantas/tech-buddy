@@ -1,10 +1,27 @@
+import { Pagination } from '@/components/pagination'
 import { Stars } from '@/components/stars'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 import type { Review } from '@/types/review'
 import { MessageCircleIcon } from 'lucide-react'
 
-export function TechReviewsCard({ reviews }: { reviews: Review[] }) {
+type TechReviewsCardProps = {
+  reviews: Review[]
+  currentPage: number
+  totalReviews: number
+}
+
+export async function TechReviewsCard({
+  reviews,
+  currentPage,
+  totalReviews,
+}: TechReviewsCardProps) {
   return (
     <Card>
       <CardHeader>
@@ -56,6 +73,16 @@ export function TechReviewsCard({ reviews }: { reviews: Review[] }) {
           ))}
         </section>
       </CardContent>
+
+      {reviews.length > 0 && (
+        <CardFooter>
+          <Pagination
+            page={currentPage}
+            totalCount={totalReviews}
+            perPage={5}
+          />
+        </CardFooter>
+      )}
     </Card>
   )
 }
