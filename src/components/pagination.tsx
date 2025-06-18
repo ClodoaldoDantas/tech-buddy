@@ -7,7 +7,7 @@ import {
   ChevronsRight,
 } from 'lucide-react'
 
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useQueryParams } from '@/hooks/use-query-params'
 import { Button } from './ui/button'
 
 interface PaginationProps {
@@ -17,17 +17,11 @@ interface PaginationProps {
 }
 
 export function Pagination({ page, totalCount, perPage }: PaginationProps) {
-  const searchParams = useSearchParams()
-  const pathname = usePathname()
-  const router = useRouter()
-
   const pages = Math.ceil(totalCount / perPage) || 1
+  const { setParams } = useQueryParams()
 
   function handlePageChange(newPage: number) {
-    const params = new URLSearchParams(searchParams)
-    params.set('page', String(newPage))
-
-    router.replace(`${pathname}?${params.toString()}`, { scroll: false })
+    setParams({ page: newPage.toString() })
   }
 
   return (

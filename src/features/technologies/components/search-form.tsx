@@ -3,29 +3,20 @@
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
+import { useQueryParams } from '@/hooks/use-query-params'
 import { SearchIcon } from 'lucide-react'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import type { FormEvent } from 'react'
 
 export function SearchForm() {
-  const searchParams = useSearchParams()
-  const pathname = usePathname()
-  const router = useRouter()
+  const { params, setParams } = useQueryParams()
 
   const handleSearch = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     const formData = new FormData(event.currentTarget)
     const searchTerm = formData.get('search') as string
-    const params = new URLSearchParams(searchParams)
 
-    if (searchTerm) {
-      params.set('search', searchTerm)
-    } else {
-      params.delete('search')
-    }
-
-    router.replace(`${pathname}?${params.toString()}`)
+    setParams({ search: searchTerm ?? null })
   }
 
   return (
@@ -37,7 +28,7 @@ export function SearchForm() {
             name="search"
             placeholder="Digite o nome da tecnologia. Ex: React"
             className="w-full h-10"
-            defaultValue={searchParams.get('search')?.toString()}
+            defaultValue={params.search ?? ''}
           />
 
           <Button type="submit" size="lg">
