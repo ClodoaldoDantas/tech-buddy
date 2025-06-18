@@ -42,6 +42,66 @@ const technologies: Prisma.TechnologyCreateInput[] = [
     slug: 'flask',
     description: 'Um microframework web Python leve e flexível.',
   },
+  {
+    name: 'Vue.js',
+    slug: 'vuejs',
+    description: 'Um framework progressivo para construção de interfaces web.',
+  },
+  {
+    name: 'Angular',
+    slug: 'angular',
+    description: 'Um framework TypeScript para aplicações web robustas.',
+  },
+  {
+    name: 'Svelte',
+    slug: 'svelte',
+    description: 'Um framework reativo que compila para JavaScript eficiente.',
+  },
+  {
+    name: 'Express',
+    slug: 'express',
+    description: 'Um framework minimalista para aplicações Node.js.',
+  },
+  {
+    name: 'Laravel',
+    slug: 'laravel',
+    description: 'Um framework PHP elegante para desenvolvimento web.',
+  },
+  {
+    name: 'Ruby on Rails',
+    slug: 'rails',
+    description: 'Um framework web completo baseado em Ruby.',
+  },
+  {
+    name: 'Spring Boot',
+    slug: 'springboot',
+    description: 'Um framework Java para aplicações backend robustas.',
+  },
+  {
+    name: 'ASP.NET Core',
+    slug: 'aspnetcore',
+    description: 'Um framework para construção de APIs e apps web com .NET.',
+  },
+  {
+    name: 'GraphQL',
+    slug: 'graphql',
+    description: 'Uma linguagem de consulta para APIs flexíveis e eficientes.',
+  },
+  {
+    name: 'TypeScript',
+    slug: 'typescript',
+    description: 'Um superconjunto de JavaScript com tipagem estática.',
+  },
+  {
+    name: 'PostgreSQL',
+    slug: 'postgresql',
+    description: 'Um banco de dados relacional poderoso e open-source.',
+  },
+  {
+    name: 'MongoDB',
+    slug: 'mongodb',
+    description: 'Um banco de dados NoSQL baseado em documentos.',
+  },
 ]
 
 const comments: string[] = [

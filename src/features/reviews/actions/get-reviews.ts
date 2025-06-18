@@ -1,8 +1,7 @@
+import { REVIEWS_PER_PAGE } from '@/features/technologies/utils/constants'
 import { prisma } from '@/lib/prisma'
 
 export async function getReviews(technologyId: string, page: number) {
-  const pageSize = 5
-
   const reviews = await prisma.review.findMany({
     orderBy: {
       updatedAt: 'desc',
@@ -10,8 +9,8 @@ export async function getReviews(technologyId: string, page: number) {
     where: {
       technologyId,
     },
-    take: pageSize,
-    skip: (page - 1) * pageSize,
+    take: REVIEWS_PER_PAGE,
+    skip: (page - 1) * REVIEWS_PER_PAGE,
     select: {
       id: true,
       rating: true,
@@ -27,7 +26,7 @@ export async function getReviews(technologyId: string, page: number) {
     },
   })
 
-  const totalReviews = await prisma.review.count({
+  const totalCount = await prisma.review.count({
     where: {
       technologyId,
     },
@@ -35,6 +34,6 @@ export async function getReviews(technologyId: string, page: number) {
 
   return {
     reviews,
-    totalReviews,
+    totalCount,
   }
 }

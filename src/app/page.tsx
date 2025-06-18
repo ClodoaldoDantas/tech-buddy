@@ -4,12 +4,13 @@ import { TechListSkeleton } from '@/features/technologies/components/tech-list-s
 import { Suspense } from 'react'
 
 type HomeProps = {
-  searchParams?: Promise<{ search?: string }>
+  searchParams?: Promise<{ search?: string; page?: string }>
 }
 
 export default async function Home(props: HomeProps) {
   const searchParams = await props.searchParams
   const searchTerm = searchParams?.search || ''
+  const page = Number(searchParams?.page) || 1
 
   return (
     <main className="max-w-7xl w-full mx-auto px-4">
@@ -26,7 +27,7 @@ export default async function Home(props: HomeProps) {
       <SearchForm />
 
       <Suspense key={searchTerm} fallback={<TechListSkeleton />}>
-        <TechList searchTerm={searchTerm} />
+        <TechList searchTerm={searchTerm} currentPage={page} />
       </Suspense>
     </main>
   )

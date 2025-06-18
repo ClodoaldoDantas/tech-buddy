@@ -16,7 +16,7 @@ export function SearchForm() {
     const formData = new FormData(event.currentTarget)
     const searchTerm = formData.get('search') as string
 
-    setParams({ search: searchTerm ?? null })
+    setParams({ search: searchTerm ?? null, page: '1' })
   }
 
   return (

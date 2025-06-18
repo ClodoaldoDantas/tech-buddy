@@ -8,19 +8,20 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { REVIEWS_PER_PAGE } from '@/features/technologies/utils/constants'
 import type { Review } from '@/types/review'
 import { MessageCircleIcon } from 'lucide-react'
 
 type TechReviewsCardProps = {
   reviews: Review[]
   currentPage: number
-  totalReviews: number
+  totalCount: number
 }
 
 export async function TechReviewsCard({
   reviews,
   currentPage,
-  totalReviews,
+  totalCount,
 }: TechReviewsCardProps) {
   return (
     <Card>
@@ -78,8 +79,8 @@ export async function TechReviewsCard({
         <CardFooter>
           <Pagination
             page={currentPage}
-            totalCount={totalReviews}
-            perPage={5}
+            totalCount={totalCount}
+            perPage={REVIEWS_PER_PAGE}
           />
         </CardFooter>
       )}

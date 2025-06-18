@@ -1,53 +1,61 @@
 import { prisma } from '@/lib/prisma'
+import { TECHNOLOGIES_PER_PAGE } from '../utils/constants'
 
-export async function getTechnologies(term?: string) {
-  const result = await prisma.$transaction(async (tx) => {
-    const dbReviews = await tx.review.groupBy({
-      by: ['technologyId'],
+type GetTechnologiesParams = {
+  term?: string
+  page: number
+}
+
+export async function getTechnologies(params: GetTechnologiesParams) {
+  const dbTechnologies = await prisma.technology.findMany({
+    orderBy: {
+      createdAt: 'desc',
+    },
+    where: {
+      name: {
+        contains: params.term,
+      },
+    },
+    take: TECHNOLOGIES_PER_PAGE,
+    skip: (params.page - 1) * TECHNOLOGIES_PER_PAGE,
+    select: {
+      id: true,
+      name: true,
+      slug: true,
+      description: true,
       _count: {
-        _all: true,
-      },
-      _avg: {
-        rating: true,
-      },
-      where: {
-        technology: {
-          name: {
-            contains: term,
-          },
+        select: {
+          reviews: true,
         },
       },
-    })
-
-    const dbTechnologies = await tx.technology.findMany({
-      orderBy: {
-        createdAt: 'desc',
-      },
-      select: {
-        id: true,
-        name: true,
-        slug: true,
-        description: true,
-      },
-      where: {
-        name: {
-          contains: term,
+      reviews: {
+        select: {
+          rating: true,
         },
       },
-    })
-
-    const technologies = dbTechnologies.map((tech) => {
-      const review = dbReviews.find((review) => review.technologyId === tech.id)
-
-      return {
-        ...tech,
-        reviewsCount: review?._count._all || 0,
-        averageRating: review?._avg.rating || 0,
-      }
-    })
-
-    return { technologies }
+    },
   })
 
-  return result
+  const totalCount = await prisma.technology.count({
+    where: {
+      name: {
+        contains: params.term,
+      },
+    },
+  })
+
+  const technologies = dbTechnologies.map((tech) => {
+    const sumReviews = tech.reviews.reduce((acc, { rating }) => acc + rating, 0)
+
+    const totalReviews = tech.reviews.length
+    const averageRating = sumReviews / totalReviews
+
+    return {
+      ...tech,
+      reviewsCount: tech._count.reviews,
+      averageRating,
+    }
+  })
+
+  return { technologies, totalCount }
 }

@@ -20,7 +20,7 @@ export default async function TechnologyPage(props: {
 
   const searchParams = await props.searchParams
   const page = Number(searchParams?.page) || 1
-  const { reviews, totalReviews } = await getReviews(technology.id, page)
+  const { reviews, totalCount } = await getReviews(technology.id, page)
 
   return (
     <main className="max-w-4xl w-full mx-auto px-4 py-8 space-y-4">
@@ -36,10 +36,11 @@ export default async function TechnologyPage(props: {
       </Button>
 
       <TechCardDetails technology={technology} />
+
       <TechReviewsCard
         reviews={reviews}
         currentPage={page}
-        totalReviews={totalReviews}
+        totalCount={totalCount}
       />
     </main>
   )
