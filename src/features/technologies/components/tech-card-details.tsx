@@ -9,30 +9,27 @@ import {
 } from '@/components/ui/card'
 import type { Technology } from '@/types/technology'
 import { NotebookPenIcon } from 'lucide-react'
-import Link from 'next/link'
 import { TotalRatings } from './total-ratings'
 
 export function TechCardDetails({ data }: { data: Technology }) {
   return (
-    <Link className="group" href={`/technologies/${data.slug}`}>
-      <Card className="group-hover:shadow-lg transition-shadow duration-300 ease-in-out">
-        <CardHeader>
-          <CardTitle className="text-xl font-bold">{data.name}</CardTitle>
-          <CardDescription className="min-h-14 text-lg">
-            {data.description}
-          </CardDescription>
-        </CardHeader>
+    <Card>
+      <CardHeader>
+        <CardTitle className="text-xl font-bold">{data.name}</CardTitle>
+        <CardDescription className="min-h-14 text-lg">
+          {data.description}
+        </CardDescription>
+      </CardHeader>
 
-        <CardFooter className="flex items-center gap-6">
-          <Stars value={data.averageRating} />
-          <TotalRatings total={data.reviewsCount} />
+      <CardFooter className="flex items-center gap-6">
+        <Stars value={data.averageRating} />
+        <TotalRatings total={data.reviewsCount} />
 
-          <Button className="ml-auto">
-            <NotebookPenIcon />
-            Escrever uma avaliação
-          </Button>
-        </CardFooter>
-      </Card>
-    </Link>
+        <Button className="ml-auto">
+          <NotebookPenIcon />
+          Escrever uma avaliação
+        </Button>
+      </CardFooter>
+    </Card>
   )
 }

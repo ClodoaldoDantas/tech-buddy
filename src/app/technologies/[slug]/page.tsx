@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button'
-import { getTechnology } from '@/features/technologies/actions/get-technology'
+import { TechReviewsCard } from '@/features/reviews/components/tech-reviews-card'
+import { getTechnologyWithReviews } from '@/features/technologies/actions/get-technology'
 import { TechCardDetails } from '@/features/technologies/components/tech-card-details'
 import { ChevronLeftIcon } from 'lucide-react'
 import Link from 'next/link'
@@ -11,7 +12,7 @@ export default async function TechnologyPage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  const { technology } = await getTechnology(slug)
+  const { technology } = await getTechnologyWithReviews(slug)
 
   if (!technology) {
     notFound()
@@ -31,6 +32,7 @@ export default async function TechnologyPage({
       </Button>
 
       <TechCardDetails data={technology} />
+      <TechReviewsCard reviews={technology.reviews} />
     </main>
   )
 }

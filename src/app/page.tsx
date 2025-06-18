@@ -18,7 +18,7 @@ export default async function Home(props: HomeProps) {
           Bem-vindo a nossa plataforma
         </h1>
 
-        <p className="text-zinc-600 text-lg">
+        <p className="text-muted-foreground text-lg">
           Descubra e analise as últimas tecnologias
         </p>
       </header>

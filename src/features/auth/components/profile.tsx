@@ -15,9 +15,9 @@ export function Profile({ user }: { user: User }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="flex items-center gap-3 cursor-pointer">
-        <Avatar className="h-8 w-8 rounded-lg">
+        <Avatar className="size-8 rounded-full">
           <AvatarImage src={user.image ?? ''} alt={user?.name ?? ''} />
-          <AvatarFallback className="rounded-lg">
+          <AvatarFallback className="rounded-full">
             {user.name?.charAt(0)}
           </AvatarFallback>
         </Avatar>

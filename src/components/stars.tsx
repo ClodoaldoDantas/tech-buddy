@@ -1,6 +1,11 @@
 import { StarIcon } from 'lucide-react'
 
-export function Stars({ value }: { value: number }) {
+type StarsProps = {
+  value: number
+  showValue?: boolean
+}
+
+export function Stars({ value, showValue = true }: StarsProps) {
   return (
     <div className="flex items-center gap-2">
       <div className="flex items-center gap-0.5">
@@ -12,7 +17,7 @@ export function Stars({ value }: { value: number }) {
         ))}
       </div>
 
-      <strong className="font-medium">{value}</strong>
+      {showValue && <strong className="font-medium">{value}</strong>}
     </div>
   )
 }
