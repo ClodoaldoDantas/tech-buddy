@@ -3,7 +3,7 @@
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { revalidatePath } from 'next/cache'
-import { validateFields } from '../../../utils/validate-fields'
+import { validateFields } from '../../../utils/validation'
 
 type CreateReviewParams = {
   rating: number
@@ -20,7 +20,7 @@ export async function createReview({
 }: CreateReviewParams) {
   const session = await auth()
 
-  if (!session?.user || !session.user.id) {
+  if (!session?.user?.id) {
     return {
       success: false,
       message: 'Usuário não autenticado. Por favor, faça login para continuar.',

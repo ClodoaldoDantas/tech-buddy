@@ -3,9 +3,12 @@ export type Review = {
   rating: number
   comment: string | null
   updatedAt: Date
-  user: {
+  user?: {
     name: string | null
     id: string
     image: string | null
+  }
+  technology?: {
+    name: string
   }
 }

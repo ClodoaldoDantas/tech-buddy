@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import type { Technology } from '@/types/technology'
+import type { Technology } from '@/features/technologies/types'
 import Link from 'next/link'
 import { TotalRatings } from './total-ratings'
 

@@ -6,8 +6,8 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import type { Technology } from '@/features/technologies/types'
 import { auth } from '@/lib/auth'
-import type { Technology } from '@/types/technology'
 import { CreateReviewForm } from '../../reviews/components/create-review-form'
 import { TotalRatings } from './total-ratings'
 
