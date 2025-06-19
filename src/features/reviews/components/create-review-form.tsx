@@ -14,33 +14,47 @@ import {
 } from '@/components/ui/dialog'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
+import { useQueryParams } from '@/hooks/use-query-params'
 import { NotebookPenIcon } from 'lucide-react'
 import { type FormEvent, useState } from 'react'
 import { toast } from 'sonner'
-import { validateFields } from '../utils/validate-fields'
+import { createReview } from '../actions/create-review'
 
-export function CreateReviewForm() {
+type CreateReviewFormProps = {
+  technologyId: string
+  technologySlug: string
+}
+
+export function CreateReviewForm({
+  technologyId,
+  technologySlug,
+}: CreateReviewFormProps) {
   const [rating, setRating] = useState(0)
   const [comment, setComment] = useState('')
+  const { setParams } = useQueryParams()
 
   const resetForm = () => {
     setRating(0)
     setComment('')
   }
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    const formIsValid = validateFields({ rating, comment })
 
-    if (!formIsValid) {
-      toast.error('Por favor, preencha todos os campos.')
-      return
+    const result = await createReview({
+      rating,
+      comment,
+      technologyId,
+      technologySlug,
+    })
+
+    if (result.success) {
+      toast.success(result.message)
+      setParams({ page: null })
+      resetForm()
+    } else {
+      toast.error(result.message)
     }
-
-    // TODO: Implementar a lógica de envio da avaliação
-    console.log({ rating, comment })
-    toast.success('Avaliação enviada com sucesso!')
-    resetForm()
   }
 
   return (
@@ -72,6 +86,7 @@ export function CreateReviewForm() {
               id="comment"
               placeholder="Deixe seu comentário..."
               className="min-h-36"
+              required
               value={comment}
               onChange={(e) => setComment(e.target.value)}
             />

@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/card'
 import { auth } from '@/lib/auth'
 import type { Technology } from '@/types/technology'
-import { CreateReviewForm } from './create-review-form'
+import { CreateReviewForm } from '../../reviews/components/create-review-form'
 import { TotalRatings } from './total-ratings'
 
 type TechCardDetailsProps = {
@@ -31,7 +31,12 @@ export async function TechCardDetails({ technology }: TechCardDetailsProps) {
         <Stars value={technology.averageRating} />
         <TotalRatings total={technology.reviewsCount} />
 
-        {session?.user && <CreateReviewForm />}
+        {session?.user && (
+          <CreateReviewForm
+            technologyId={technology.id}
+            technologySlug={technology.slug}
+          />
+        )}
       </CardFooter>
     </Card>
   )
