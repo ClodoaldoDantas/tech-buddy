@@ -1,5 +1,4 @@
 import { Stars } from '@/components/stars'
-import { Button } from '@/components/ui/button'
 import {
   Card,
   CardDescription,
@@ -9,7 +8,7 @@ import {
 } from '@/components/ui/card'
 import { auth } from '@/lib/auth'
 import type { Technology } from '@/types/technology'
-import { NotebookPenIcon } from 'lucide-react'
+import { CreateReviewForm } from './create-review-form'
 import { TotalRatings } from './total-ratings'
 
 type TechCardDetailsProps = {
@@ -32,12 +31,7 @@ export async function TechCardDetails({ technology }: TechCardDetailsProps) {
         <Stars value={technology.averageRating} />
         <TotalRatings total={technology.reviewsCount} />
 
-        {session?.user && (
-          <Button className="ml-auto">
-            <NotebookPenIcon />
-            Escrever uma avaliação
-          </Button>
-        )}
+        {session?.user && <CreateReviewForm />}
       </CardFooter>
     </Card>
   )

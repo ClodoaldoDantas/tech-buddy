@@ -12,7 +12,7 @@ export function Stars({ value, showValue = true }: StarsProps) {
         {Array.from({ length: 5 }, (_, i) => (
           <StarIcon
             key={i.toString()}
-            className={`size-4 ${i < Math.floor(value) ? 'text-yellow-500' : 'text-gray-300'}`}
+            className={`size-4 ${i < Math.floor(value) ? 'text-yellow-500 fill-current' : 'text-gray-300'}`}
           />
         ))}
       </div>
