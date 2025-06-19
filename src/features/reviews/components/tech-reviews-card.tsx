@@ -1,6 +1,4 @@
 import { Pagination } from '@/components/pagination'
-import { Stars } from '@/components/stars'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
   Card,
   CardContent,
@@ -11,6 +9,7 @@ import {
 import { REVIEWS_PER_PAGE } from '@/features/technologies/utils/constants'
 import type { Review } from '@/types/review'
 import { MessageCircleIcon } from 'lucide-react'
+import { TechReviewItem } from './tech-review-item'
 
 type TechReviewsCardProps = {
   reviews: Review[]
@@ -41,36 +40,7 @@ export async function TechReviewsCard({
 
         <section className="divide-y divide-zinc-200">
           {reviews.map((review) => (
-            <div className="flex items-center gap-4 pb-5 mb-5" key={review.id}>
-              <Avatar className="size-10 rounded-full">
-                <AvatarImage
-                  src={review.user.image ?? ''}
-                  alt={review.user?.name ?? ''}
-                />
-                <AvatarFallback className="rounded-full">
-                  {review.user.name?.charAt(0)}
-                </AvatarFallback>
-              </Avatar>
-
-              <div>
-                <strong className="text-zinc-900 font-medium">
-                  {review.user.name}
-                </strong>
-
-                <div className="flex items-center gap-2">
-                  <Stars value={review.rating} showValue={false} />
-                  <span className="text-sm text-muted-foreground">
-                    {new Date(review.updatedAt).toLocaleDateString('pt-BR', {
-                      year: 'numeric',
-                      month: 'short',
-                      day: 'numeric',
-                    })}
-                  </span>
-                </div>
-
-                <p className="text-muted-foreground mt-1">{review.comment}</p>
-              </div>
-            </div>
+            <TechReviewItem key={review.id} review={review} />
           ))}
         </section>
       </CardContent>
