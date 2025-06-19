@@ -1,5 +1,5 @@
-import { REVIEWS_PER_PAGE } from '@/features/technologies/utils/constants'
 import { prisma } from '@/lib/prisma'
+import { REVIEWS_PER_PAGE } from '@/utils/constants'
 
 export async function getReviews(technologyId: string, page: number) {
   const reviews = await prisma.review.findMany({

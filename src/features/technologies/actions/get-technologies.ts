@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/prisma'
-import { TECHNOLOGIES_PER_PAGE } from '../utils/constants'
+import { TECHNOLOGIES_PER_PAGE } from '../../../utils/constants'
 
 type GetTechnologiesParams = {
   term?: string

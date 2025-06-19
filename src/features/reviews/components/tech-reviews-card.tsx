@@ -6,8 +6,8 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { REVIEWS_PER_PAGE } from '@/features/technologies/utils/constants'
 import type { Review } from '@/types/review'
+import { REVIEWS_PER_PAGE } from '@/utils/constants'
 import { MessageCircleIcon } from 'lucide-react'
 import { TechReviewItem } from './tech-review-item'
 

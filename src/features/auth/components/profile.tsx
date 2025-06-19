@@ -7,8 +7,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { getFirstLetter, getFirstName } from '@/utils/strings'
 import { StarIcon } from 'lucide-react'
 import type { User } from 'next-auth'
+import Link from 'next/link'
 import { SignOutButton } from './sign-out-button'
 
 export function Profile({ user }: { user: User }) {
@@ -18,11 +20,11 @@ export function Profile({ user }: { user: User }) {
         <Avatar className="size-8 rounded-full">
           <AvatarImage src={user.image ?? ''} alt={user?.name ?? ''} />
           <AvatarFallback className="rounded-full">
-            {user.name?.charAt(0)}
+            {getFirstLetter(user.name)}
           </AvatarFallback>
         </Avatar>
 
-        <span>Meu Perfil</span>
+        <span>Olá, {getFirstName(user.name)}</span>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent>
@@ -36,9 +38,11 @@ export function Profile({ user }: { user: User }) {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem>
-          <StarIcon />
-          Minhas Avaliações
+        <DropdownMenuItem asChild>
+          <Link href="/profile">
+            <StarIcon />
+            Minhas Avaliações
+          </Link>
         </DropdownMenuItem>
 
         <SignOutButton />

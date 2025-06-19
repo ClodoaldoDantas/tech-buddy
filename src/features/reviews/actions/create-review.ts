@@ -3,7 +3,7 @@
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { revalidatePath } from 'next/cache'
-import { validateFields } from '../utils/validate-fields'
+import { validateFields } from '../../../utils/validate-fields'
 
 type CreateReviewParams = {
   rating: number

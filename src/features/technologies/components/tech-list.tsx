@@ -1,6 +1,6 @@
 import { Pagination } from '@/components/pagination'
+import { TECHNOLOGIES_PER_PAGE } from '../../../utils/constants'
 import { getTechnologies } from '../actions/get-technologies'
-import { TECHNOLOGIES_PER_PAGE } from '../utils/constants'
 import { TechCard } from './tech-card'
 
 type TechListProps = {
