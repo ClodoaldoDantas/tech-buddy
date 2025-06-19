@@ -27,6 +27,20 @@ export async function createReview({
     }
   }
 
+  const userHasReviewed = await prisma.review.findFirst({
+    where: {
+      userId: session.user.id,
+      technologyId,
+    },
+  })
+
+  if (userHasReviewed) {
+    return {
+      success: false,
+      message: 'Você já avaliou esta tecnologia.',
+    }
+  }
+
   const fieldsIsValid = validateFields({ rating, comment })
 
   if (!fieldsIsValid) {
