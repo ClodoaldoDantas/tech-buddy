@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { getReviews } from '@/features/reviews/actions/get-reviews'
-import { TechReviewsCard } from '@/features/reviews/components/tech-reviews-card'
+import { TechReviewList } from '@/features/reviews/components/tech-review-list'
 import { getTechnologyWithReviews } from '@/features/technologies/actions/get-technology'
 import { TechCardDetails } from '@/features/technologies/components/tech-card-details'
 import { ChevronLeftIcon } from 'lucide-react'
@@ -37,7 +37,7 @@ export default async function TechnologyPage(props: {
 
       <TechCardDetails technology={technology} />
 
-      <TechReviewsCard
+      <TechReviewList
         reviews={reviews}
         currentPage={page}
         totalCount={totalCount}

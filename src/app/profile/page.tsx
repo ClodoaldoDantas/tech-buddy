@@ -1,4 +1,4 @@
-import { UserReviews } from '@/features/reviews/components/user-reviews'
+import { UserReviewList } from '@/features/reviews/components/user-review-list'
 import { auth } from '@/lib/auth'
 import { redirect } from 'next/navigation'
 
@@ -18,7 +18,7 @@ export default async function ProfilePage() {
         </p>
       </header>
 
-      <UserReviews />
+      <UserReviewList />
     </main>
   )
 }

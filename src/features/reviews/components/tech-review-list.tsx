@@ -11,17 +11,17 @@ import { REVIEWS_PER_PAGE } from '@/utils/constants'
 import { MessageCircleIcon } from 'lucide-react'
 import { TechReviewItem } from './tech-review-item'
 
-type TechReviewsCardProps = {
+type TechReviewListProps = {
   reviews: Review[]
   currentPage: number
   totalCount: number
 }
 
-export async function TechReviewsCard({
+export async function TechReviewList({
   reviews,
   currentPage,
   totalCount,
-}: TechReviewsCardProps) {
+}: TechReviewListProps) {
   return (
     <Card>
       <CardHeader>
