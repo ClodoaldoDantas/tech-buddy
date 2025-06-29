@@ -13,7 +13,7 @@ Tech Buddy é uma aplicação web para avaliação e consulta de tecnologias, pe
 
 ## Tecnologias Utilizadas
 
-[![My Skills](https://skillicons.dev/icons?i=react,next,ts,tailwind,prisma,sqlite)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=react,next,ts,tailwind,prisma,postgres)](https://skillicons.dev)
 
 ## Como rodar o projeto
 
