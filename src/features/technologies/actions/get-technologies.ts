@@ -23,11 +23,6 @@ export async function getTechnologies(params: GetTechnologiesParams) {
       name: true,
       slug: true,
       description: true,
-      _count: {
-        select: {
-          reviews: true,
-        },
-      },
       reviews: {
         select: {
           rating: true,
@@ -45,14 +40,22 @@ export async function getTechnologies(params: GetTechnologiesParams) {
   })
 
   const technologies = dbTechnologies.map((tech) => {
-    const sumReviews = tech.reviews.reduce((acc, { rating }) => acc + rating, 0)
-
     const totalReviews = tech.reviews.length
+
+    if (totalReviews === 0) {
+      return {
+        ...tech,
+        reviewsCount: 0,
+        averageRating: 0,
+      }
+    }
+
+    const sumReviews = tech.reviews.reduce((acc, { rating }) => acc + rating, 0)
     const averageRating = sumReviews / totalReviews
 
     return {
       ...tech,
-      reviewsCount: tech._count.reviews,
+      reviewsCount: totalReviews,
       averageRating,
     }
   })
