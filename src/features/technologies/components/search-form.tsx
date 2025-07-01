@@ -22,16 +22,19 @@ export function SearchForm() {
   return (
     <Card>
       <CardContent>
-        <form onSubmit={handleSearch} className="flex items-center gap-4">
+        <form
+          onSubmit={handleSearch}
+          className="flex flex-col sm:flex-row items-center gap-4"
+        >
           <Input
             type="search"
             name="search"
-            placeholder="Digite o nome da tecnologia. Ex: React"
+            placeholder="Digite o nome da tecnologia"
             className="w-full h-10"
             defaultValue={params.search ?? ''}
           />
 
-          <Button type="submit" size="lg">
+          <Button type="submit" size="lg" className="w-full sm:w-auto">
             <SearchIcon className="size-5" />
             Buscar tecnologia
           </Button>

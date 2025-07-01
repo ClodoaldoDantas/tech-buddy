@@ -21,13 +21,15 @@ export async function TechCardDetails({ technology }: TechCardDetailsProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-xl font-bold">{technology.name}</CardTitle>
-        <CardDescription className="min-h-14 text-lg">
+        <CardTitle className="text-lg sm:text-xl font-bold">
+          {technology.name}
+        </CardTitle>
+        <CardDescription className="min-h-14 text-base sm:text-lg">
           {technology.description}
         </CardDescription>
       </CardHeader>
 
-      <CardFooter className="flex items-center gap-6">
+      <CardFooter className="flex flex-wrap items-center justify-between gap-4 sm:gap-6">
         <Stars value={technology.averageRating} />
         <TotalRatings total={technology.reviewsCount} />
 

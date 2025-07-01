@@ -26,11 +26,11 @@ export function Pagination({ page, totalCount, perPage }: PaginationProps) {
 
   return (
     <div className="w-full flex items-center justify-between">
-      <span className="text-sm text-muted-foreground">
+      <span className="hidden sm:block text-sm text-muted-foreground">
         Total de {totalCount} item(s)
       </span>
 
-      <div className="flex items-center gap-6 lg:gap-8">
+      <div className="ml-auto sm:ml-0 flex items-center gap-6 lg:gap-8">
         <div className="text-sm font-medium">
           Página {page} de {pages}
         </div>

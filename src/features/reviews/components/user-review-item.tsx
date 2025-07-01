@@ -19,7 +19,7 @@ export function UserReviewItem({ review }: { review: Review }) {
           {review.technology?.name}
         </CardTitle>
 
-        <div className="flex items-center gap-5">
+        <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-5">
           <Stars value={review.rating} />
 
           <div className="flex items-center gap-2 text-muted-foreground">

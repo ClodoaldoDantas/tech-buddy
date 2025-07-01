@@ -60,7 +60,7 @@ export function CreateReviewForm({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="ml-auto">
+        <Button className="sm:ml-auto">
           <NotebookPenIcon />
           Escrever uma avaliação
         </Button>

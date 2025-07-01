@@ -22,11 +22,13 @@ export async function TechList({ searchTerm, currentPage }: TechListProps) {
         ))}
       </div>
 
-      <Pagination
-        page={currentPage}
-        perPage={TECHNOLOGIES_PER_PAGE}
-        totalCount={totalCount}
-      />
+      <div className="pb-8">
+        <Pagination
+          page={currentPage}
+          perPage={TECHNOLOGIES_PER_PAGE}
+          totalCount={totalCount}
+        />
+      </div>
     </>
   )
 }

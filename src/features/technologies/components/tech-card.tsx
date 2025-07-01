@@ -15,8 +15,10 @@ export function TechCard({ data }: { data: Technology }) {
     <Link className="group" href={`/technologies/${data.slug}`}>
       <Card className="group-hover:shadow-lg transition-shadow duration-300 ease-in-out">
         <CardHeader>
-          <CardTitle className="text-xl font-bold">{data.name}</CardTitle>
-          <CardDescription className="min-h-14 text-lg">
+          <CardTitle className="text-lg sm:text-xl font-bold">
+            {data.name}
+          </CardTitle>
+          <CardDescription className="min-h-14 text-base sm:text-lg">
             {data.description}
           </CardDescription>
         </CardHeader>

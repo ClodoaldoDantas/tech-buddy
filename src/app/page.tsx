@@ -1,3 +1,4 @@
+import { PageHeader } from '@/components/page-header'
 import { SearchForm } from '@/features/technologies/components/search-form'
 import { TechList } from '@/features/technologies/components/tech-list'
 import { TechListSkeleton } from '@/features/technologies/components/tech-list-skeleton'
@@ -14,15 +15,10 @@ export default async function Home(props: HomeProps) {
 
   return (
     <main className="max-w-7xl w-full mx-auto px-4">
-      <header className="py-8 leading-relaxed">
-        <h1 className="text-2xl text-zinc-900 font-bold">
-          Bem-vindo a nossa plataforma
-        </h1>
-
-        <p className="text-muted-foreground text-lg">
-          Descubra e analise as últimas tecnologias
-        </p>
-      </header>
+      <PageHeader
+        title="Bem-vindo a nossa plataforma"
+        description="Descubra e analise as últimas tecnologias"
+      />
 
       <SearchForm />
 
