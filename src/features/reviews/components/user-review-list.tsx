@@ -6,7 +6,7 @@ export async function UserReviewList() {
   const { reviews } = await getUserReviews()
 
   return (
-    <section className="space-y-4">
+    <section className="space-y-4 pb-8">
       {reviews.length === 0 && (
         <div className="flex items-center gap-2">
           <AlertCircleIcon className="size-6 text-blue-400" />
